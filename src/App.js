@@ -25,20 +25,22 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Document file="/sample.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-          <Page height="600" pageNumber={pageNumber} />
-        </Document>
-        <p> Page {pageNumber} of {numPages}</p>
-        { pageNumber > 1 && 
-        <button onClick={changePageBack}>Previous Page</button>
-        }
-        {
-          pageNumber < numPages &&
-          <button onClick={changePageNext}>Next Page</button>
-        }
-      </header>
-   
+     
+      <center>
+        <div>
+          <Document file="/sample.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+            {Array.from(
+              new Array(numPages),
+              (el,index) => (
+                <Page 
+                  key={`page_${index+1}`}
+                  pageNumber={index+1}
+                />
+              )
+            )}
+          </Document>
+        </div>
+      </center>
     </div>
   );
 }
